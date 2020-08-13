@@ -1,0 +1,324 @@
+html,
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: -apple-system, BlinkMacSystemFont, 'Noto Serif', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 14px;
+  margin: 0;
+  min-height: 100vh;
+  color: #2B3037;
+  background-color: #F2F4F7;
+}
+input,
+select,
+textarea,
+button {
+  font-family: -apple-system, BlinkMacSystemFont, 'Noto Serif', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  outline: unset;
+  border: unset;
+}
+.ui--wrapper .btn {
+  cursor: pointer;
+  padding: 0 15px;
+  min-width: 100px;
+  min-height: 30px;
+  outline: unset;
+  border: unset;
+  border-radius: 2px;
+  background-color: transparent;
+}
+.ui--wrapper .btn .icon {
+  width: 20px;
+  padding: 0 10px 0 0;
+  vertical-align: middle;
+}
+.ui--wrapper .btn .text {
+  vertical-align: middle;
+}
+.ui--wrapper .btn .text.upper {
+  text-transform: uppercase;
+}
+.ui--wrapper .btn .text.lower {
+  text-transform: lowercase;
+}
+.ui--wrapper .btn:active {
+  opacity: 0.9;
+}
+.ui--wrapper .btn-default {
+  color: #5D6D7E;
+  background-color: #e7e9ec;
+}
+.ui--wrapper .btn-primary {
+  color: #F2F4F7;
+  background-color: #2B3037;
+}
+.ui--wrapper .btn-light {
+  color: #5D6D7E;
+}
+.ui--wrapper .btn-border {
+  color: #0F3D66;
+  border: solid 1px #cfd3d9;
+  background-color: transparent;
+}
+.ui--wrapper .btn-border:hover {
+  border-color: #d8dce0;
+  background-color: #ecedf0;
+}
+.ui--header {
+  position: relative;
+  height: 200px;
+  background-image: linear-gradient(to top, rgba(43, 48, 55, 0.2) 0%, rgba(19, 25, 33, 0.8) 100%), url(../images/W1.jpg);
+  background-position: center center;
+  background-size: cover;
+}
+.ui--header .logo {
+  width: 88px;
+  margin: 20px 0 0 20px;
+}
+.ui--body {
+  position: relative;
+  padding: 0 0 60px;
+}
+.ui--body .container {
+  position: relative;
+  max-width: calc(992px - 100px);
+  margin: -50px auto 0;
+  padding: 40px 50px;
+  border-radius: 20px;
+  background-color: #F2F4F7;
+  box-shadow: 0 0 40px rgba(93, 109, 126, 0.12);
+}
+.ui--footer {
+  position: relative;
+}
+.ui--footer-top {
+  height: 200px;
+  background-color: #1f252c;
+}
+.ui--footer-bottom {
+  height: 56px;
+  background-color: #131921;
+}
+.ui--page-title {
+  position: absolute;
+  top: -50px;
+  left: 40px;
+  right: 40px;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 40px;
+  text-transform: capitalize;
+  color: #F2F4F7;
+  margin: 0;
+}
+.ui--input {
+  position: relative;
+}
+.ui--input-label {
+  color: #131921;
+  display: block;
+  margin: 0 0 5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  user-select: none;
+}
+.ui--input-label[required]::after {
+  content: ' *';
+  color: #E53935;
+}
+.ui--input-desc {
+  color: #9EA7B2;
+  margin: 0 0 5px;
+  font-size: 12px;
+  font-weight: lighter;
+}
+.ui--input-icon {
+  position: absolute;
+  z-index: 1;
+  padding: 0 12px;
+  font-size: 18px;
+  line-height: 41px;
+  pointer-events: none !important;
+  color: #0F3D66;
+}
+.ui--input-default,
+.ui--input-select {
+  position: relative;
+  display: block;
+  width: calc(100% - 40px);
+  height: 45px;
+  padding: 0 20px;
+  outline: unset;
+  border: unset;
+  border-radius: 2px;
+  color: #2B3037;
+  background-color: #ecedf0;
+}
+.ui--input-default:active,
+.ui--input-select:active,
+.ui--input-default:focus,
+.ui--input-select:focus {
+  background-color: #eeeff1;
+  box-shadow: 0 0 0 1px rgba(33, 150, 243, 0.3), 0 0 0 4px rgba(33, 150, 243, 0.2);
+}
+.ui--input-select {
+  width: 100%;
+  padding-right: 31px;
+  text-transform: capitalize;
+}
+.ui--input-select ~ .arrow {
+  position: absolute;
+  right: 4px;
+  width: 21px;
+  height: 21px;
+  margin: -43px 0 0;
+  padding: 10px 5px;
+  color: #5D6D7E;
+  background-color: #ecedf0;
+  pointer-events: none;
+  display: initial !important;
+}
+.ui--input-errors {
+  color: #E53935;
+  font-size: 12px;
+  font-style: italic;
+}
+.ui--input .arrow {
+  display: none;
+}
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .ui--booking {
+    backdrop-filter: blur(20px);
+    background-color: rgba(242, 244, 247, 0.84) !important;
+  }
+}
+.ui--booking-step {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 30px;
+  user-select: none;
+}
+.ui--booking-step .li {
+  position: relative;
+  cursor: pointer;
+  font-weight: 400;
+  line-height: 40px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #bec5cb;
+  border-bottom: solid 2px #dfe2e5;
+}
+.ui--booking-step .li.active {
+  font-weight: 700;
+  color: #131921;
+  border-color: #131921;
+}
+.ui--booking-content-head .title {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.ui--booking-content-head .desc {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 400;
+  color: #9EA7B2;
+}
+.ui--booking-content-container {
+  margin: 30px 0;
+  padding: 0 15px;
+}
+.ui--booking-content-footer {
+  margin: 30px 0 0;
+  padding: 0 15px;
+  text-align: right;
+}
+.ui--booking-content-footer .btn {
+  height: 40px;
+}
+.ui--booking-content-footer .btn-default {
+  width: 128px;
+  margin-right: 20px;
+}
+.ui--booking-content-footer .btn-primary {
+  width: 256px;
+  font-size: 15px;
+}
+.ui--booking-content.first {
+  position: relative;
+}
+.ui--booking-content.first [class$="content-container"] {
+  display: grid;
+  grid-row-gap: 25px;
+  grid-auto-flow: row;
+}
+.ui--booking-content.second .branch {
+  display: grid;
+  grid-column-gap: 30px;
+  grid-auto-flow: column;
+  justify-content: flex-end;
+}
+.ui--booking-content.second .branch .icon {
+  height: 18px;
+  color: #0F3D66;
+}
+.ui--booking-content.second .branch .text {
+  padding: 0 0 0 5px;
+}
+.ui--booking-content.second .costomers {
+  position: relative;
+  padding: 20px;
+  border-radius: 10px;
+  border: solid 1px #cfd3d9;
+}
+.ui--booking-content.second .costomers:not(:last-child) {
+  margin-bottom: 30px;
+}
+.ui--booking-content.second .costomers:hover {
+  border-color: #83c4f8;
+  box-shadow: 0 0 0 5px rgba(33, 150, 243, 0.1);
+}
+.ui--booking-content.second .costomers .name {
+  position: relative;
+  margin: 0 0 20px;
+}
+.ui--booking-content.second .costomers .name input {
+  display: block;
+  width: 100%;
+  padding: 0 0 10px;
+  font-size: 22px;
+  font-weight: 700;
+  border-bottom: dashed 1px #cfd3d9;
+  background-color: transparent;
+}
+.ui--booking-content.second .costomers .name .icon {
+  position: absolute;
+  top: 4px;
+  right: 10px;
+  height: 24px;
+  color: #9EA7B2;
+}
+.ui--booking-content.second .costomers .warn {
+  text-align: center;
+  line-height: 2;
+  color: #9EA7B2;
+}
+.ui--booking-content.second .costomers .btn {
+  display: block;
+  height: 35px;
+  max-width: 210px;
+  margin: 15px auto 0;
+}
+.ui--booking-content.second .action {
+  margin: 10px 0;
+}
+.ui--booking-content.second .action .btn {
+  width: 150px;
+  height: 32px;
+  font-weight: 700;
+  border-radius: 4px;
+}
+/*# sourceMappingURL=./style.css.map */
