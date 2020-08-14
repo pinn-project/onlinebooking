@@ -19,7 +19,17 @@ function createApp (selector: string): void {
 	const data: any = () => {
 		return {
 			mainForm: {
-				a: 0, b: 0, c: 0, d: 'Guest Name 1'
+				a: 0,
+				b: 0,
+				c: 0,
+				d: 0,
+				e: [
+					{ name: 'Guest Name 1', items: [2, 4] },
+					{ name: 'Guest Name 2', items: [] }
+				]
+			},
+			modals: {
+				a: { on: false, data: {} }
 			},
 			currentStep: 2
 		}
@@ -34,6 +44,12 @@ function createApp (selector: string): void {
 		onSwitch (from: number, to: number, data?: any): void {
 			if (data) { this.mainForm = data }
 			this.currentStep = to
+		},
+
+		onApply (input: any): void {},
+
+		onClose (input: string): void {
+			this.modals[input].on = false
 		}
 	}
 
@@ -60,7 +76,8 @@ function createApp (selector: string): void {
 		ChildElementFirst	: createChildElementFirst(),
 		ChildElementSecond: createChildElementSecond(),
 		ChildElementThird	: createChildElementThird(),
-		ChildElementFourth: createChildElementFourth()
+		ChildElementFourth: createChildElementFourth(),
+		ModalElementSetitem: createModalElementSetitem()
 	}
 
 	// __GLOBAL_COMPONENT
@@ -150,6 +167,10 @@ function createChildElementSecond (): any {
 
 		next (): void {
 			this.$emit('switch', this.nodeId, this.nextId, this.currentForm) // cb(from, to, data)
+		},
+
+		hasItem (input: any[]): boolean {
+			return Boolean(isArray(input) && input.length)
 		}
 	}
 	
@@ -292,4 +313,76 @@ function createInputElement (): any {
 		computed,
 		template
 	}
+}
+
+
+/**
+ * Create Modal Element for Manage Treatment.
+ */
+function createModalElementSetitem (): any {
+	const name: string = 'ModalElementSetitem'
+	const template: string = '#ui--template-modals-setitem'
+
+	// __DATA
+	const data: any = (_this: any): object => ({
+		id: 4,
+		currentValue: cloneJson(_this.dataset)
+	})
+
+	// __PROPS
+	const props: any = {
+		dataset: { type: Object, required: true }
+	}
+
+	// __WATCH
+  const watch: any = {}
+
+	// __METHODS
+	const methods: any = {
+		onApply (): void {
+			this.$emit('apply', this.currentValue)
+		},
+
+		onCancel (): void {
+			const w: any = (a: any) => JSON.stringify(a)
+			if (w(this.dataset) === w(this.currentValue)) {
+				this.$emit('close')
+			} else {
+				if (confirm('Leave without save?')) this.$emit('close')
+			}
+		}
+	}
+	
+	// __COMPUTED
+	const computed: any = {}
+	
+	// __CREATED <Lifecycle Hooks>
+	const created: any = (_this: any) => {
+		scrollhidden(true)
+	}
+
+	return { name, props, watch, methods, computed, template,
+		data () { return data(this) },
+		created () { created(this) }
+	}
+}
+
+
+/**
+ * Helpers functions.
+ */
+function hasProp (object: any, prop: string): boolean {
+  return object.hasOwnProperty(prop) || Object.prototype.hasOwnProperty.call(object, prop)
+}
+function isArray (input: any): boolean {
+  return input instanceof Array || Object.prototype.toString.call(input) === '[object Array]'
+}
+function isObject (input: any): boolean {
+  return input != null && Object.prototype.toString.call(input) === '[object Object]'
+}
+function scrollhidden (input?: boolean): void {
+  document.body.style.overflow = (input ? 'hidden' : 'unset')
+}
+function cloneJson (input: any): any {
+  return JSON.parse(JSON.stringify(input))
 }

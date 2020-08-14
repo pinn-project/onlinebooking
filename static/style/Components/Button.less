@@ -1,0 +1,54 @@
+.btn {
+  cursor: pointer;
+  padding: 0 15px;
+
+  min-width: 100px;
+  min-height: 30px;
+
+  outline: unset;
+  border: unset;
+  border-radius: 2px;
+  background-color: transparent;
+
+  .icon {
+    width: 28px;
+    padding: 0 10px 0 0;
+    vertical-align: middle;
+  }
+
+  .text {
+    vertical-align: middle;
+
+    &.upper { text-transform: uppercase }
+    &.lower { text-transform: lowercase }
+  }
+
+  &:active {
+    opacity: 0.9;
+  }
+
+  &-default {
+    color: @gray-color;
+    background-color: tint(@light-color, 75%);
+  }
+
+  &-primary {
+    color: @base-color;
+    background-color: @shsak-gray;
+  }
+
+  &-light {
+    color: @gray-color;
+  }
+
+  &-border {
+    color: @primary-color;
+    border: solid 1px tint(@light-color, 50%);
+    background-color: transparent;
+
+    &:hover {
+      border-color: tint(@light-color, 60%);
+      background-color: tint(@light-color, 80%);
+    }
+  }
+}

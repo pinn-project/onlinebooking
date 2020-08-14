@@ -1,5 +1,7 @@
 {
   "less.compile": {
+    "main": ["${workspaceRoot}\\static\\style\\Index.less"],
+    "out": "${workspaceRoot}\\static\\style\\style.css",
     "sourceMap": true
   }
 }

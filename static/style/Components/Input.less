@@ -1,0 +1,90 @@
+.ui--input {
+  position: relative;
+
+  &-label {
+    color: @bunker-gray;
+    display: block;
+    margin: 0 0 5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    user-select: none;
+
+    &[required] {
+      &::after {
+        content: ' *';
+        color: @error-color;
+      }
+    }
+  }
+
+  &-desc {
+    color: @light-color;
+    margin: 0 0 5px;
+    font-size: 12px;
+    font-weight: lighter;
+  }
+
+  &-icon {
+    position: absolute;
+    z-index: 1;
+    padding: 0 12px;
+    font-size: 18px;
+    line-height: 41px;
+    pointer-events: none !important;
+    color: @primary-color;
+  }
+
+  &-default,
+  &-select {
+    position: relative;
+    display: block;
+
+    width: 100%;
+    height: 45px;
+    padding: 0 20px;
+
+    outline: unset;
+    border: unset;
+    border-radius: 2px;
+
+    color: @shsak-gray;
+    background-color: tint(@light-color, 80%);
+
+    &:active,
+    &:focus {
+      background-color: tint(@light-color, 82%);
+      box-shadow:
+        0 0 0 1px rgba(@info-color, 0.3),
+        0 0 0 4px rgba(@info-color, 0.2);
+    }
+  }
+
+  &-select {
+    width: 100%;
+    padding-right: 31px;
+    text-transform: capitalize;
+
+    & ~ .arrow {
+      position: absolute;
+      right: 2px;
+      width: 28px;
+      height: 41px;
+      margin: -43px 0 0;
+      padding: 10px 5px 10px 0;
+      color: @gray-color;
+      background-color: tint(@light-color, 80%);
+      pointer-events: none;
+      display: initial !important;
+
+      svg { width: 22px; height: 22px }
+    }
+  }
+
+  &-errors {
+    color: @error-color;
+    font-size: 12px;
+    font-style: italic;
+  }
+
+  .arrow { display: none }
+}

@@ -1,0 +1,47 @@
+@import (less) "./01.less";
+@import (less) "./02.less";
+@import (less) "./03.less";
+@import (less) "./04.less";
+
+.ui--booking-content {
+  &-head {
+    .title {
+      margin: 0 0 10px;
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .desc {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 400;
+      color: @light-color;
+    }
+  }
+
+  &-container {
+    margin: 30px 0;
+    padding: 0 15px;
+  }
+
+  &-footer {
+    margin: 30px 0 0;
+    padding: 0 15px;
+    text-align: right;
+
+    .btn {
+      height: 40px;
+
+      &-default {
+        width: 128px;
+        margin-right: 20px;
+      }
+      
+      &-primary {
+        width: 256px;
+        font-size: 16px;
+      }
+    }
+  }
+}

@@ -18,7 +18,17 @@ function createApp(selector) {
     var data = function () {
         return {
             mainForm: {
-                a: 0, b: 0, c: 0, d: 'Guest Name 1'
+                a: 0,
+                b: 0,
+                c: 0,
+                d: 0,
+                e: [
+                    { name: 'Guest Name 1', items: [2, 4] },
+                    { name: 'Guest Name 2', items: [] }
+                ]
+            },
+            modals: {
+                a: { on: false, data: {} }
             },
             currentStep: 2
         };
@@ -32,6 +42,10 @@ function createApp(selector) {
                 this.mainForm = data;
             }
             this.currentStep = to;
+        },
+        onApply: function (input) { },
+        onClose: function (input) {
+            this.modals[input].on = false;
         }
     };
     var computed = {
@@ -52,7 +66,8 @@ function createApp(selector) {
         ChildElementFirst: createChildElementFirst(),
         ChildElementSecond: createChildElementSecond(),
         ChildElementThird: createChildElementThird(),
-        ChildElementFourth: createChildElementFourth()
+        ChildElementFourth: createChildElementFourth(),
+        ModalElementSetitem: createModalElementSetitem()
     };
     VueJs.component('input-element', createInputElement());
     new VueJs({
@@ -108,6 +123,9 @@ function createChildElementSecond() {
         },
         next: function () {
             this.$emit('switch', this.nodeId, this.nextId, this.currentForm);
+        },
+        hasItem: function (input) {
+            return Boolean(isArray(input) && input.length);
         }
     };
     var computed = {};
@@ -197,5 +215,55 @@ function createInputElement() {
         computed: computed,
         template: template
     };
+}
+function createModalElementSetitem() {
+    var name = 'ModalElementSetitem';
+    var template = '#ui--template-modals-setitem';
+    var data = function (_this) { return ({
+        id: 4,
+        currentValue: cloneJson(_this.dataset)
+    }); };
+    var props = {
+        dataset: { type: Object, required: true }
+    };
+    var watch = {};
+    var methods = {
+        onApply: function () {
+            this.$emit('apply', this.currentValue);
+        },
+        onCancel: function () {
+            var w = function (a) { return JSON.stringify(a); };
+            if (w(this.dataset) === w(this.currentValue)) {
+                this.$emit('close');
+            }
+            else {
+                if (confirm('Leave without save?'))
+                    this.$emit('close');
+            }
+        }
+    };
+    var computed = {};
+    var created = function (_this) {
+        scrollhidden(true);
+    };
+    return { name: name, props: props, watch: watch, methods: methods, computed: computed, template: template,
+        data: function () { return data(this); },
+        created: function () { created(this); }
+    };
+}
+function hasProp(object, prop) {
+    return object.hasOwnProperty(prop) || Object.prototype.hasOwnProperty.call(object, prop);
+}
+function isArray(input) {
+    return input instanceof Array || Object.prototype.toString.call(input) === '[object Array]';
+}
+function isObject(input) {
+    return input != null && Object.prototype.toString.call(input) === '[object Object]';
+}
+function scrollhidden(input) {
+    document.body.style.overflow = (input ? 'hidden' : 'unset');
+}
+function cloneJson(input) {
+    return JSON.parse(JSON.stringify(input));
 }
 //# sourceMappingURL=script.js.map

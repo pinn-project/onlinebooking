@@ -1,0 +1,25 @@
+.ui--step {
+  position: relative;
+  display: grid;
+  grid-auto-flow: column;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 30px;
+  user-select: none;
+
+  .li {
+    position: relative;
+    cursor: pointer;
+    font-weight: 400;
+    line-height: 40px;
+    text-align: center;
+    text-transform: uppercase;
+    color: tint(@gray-color, 60%);
+    border-bottom: solid 2px tint(@gray-color, 80%);
+
+    &.active {
+      font-weight: 700;
+      color: @bunker-gray;
+      border-color: @bunker-gray;
+    }
+  }
+}
