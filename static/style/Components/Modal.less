@@ -10,7 +10,15 @@
     position: relative;
     padding: 0 40px;
     background-color: white;
-    transition: all 0.2s @cubic-bezier;
+    transition: all 0.34s @cubic-bezier;
+
+    opacity: 0;
+    transform: translate(20px, 0);
+
+    &.mounted {
+      opacity: 1;
+      transform: translate(0, 0);
+    }
   }
 
   &-overlay {

@@ -10,6 +10,42 @@ var __assign = (this && this.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (this && this.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [op[0] & 2, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
 window.addEventListener('DOMContentLoaded', function () {
     createApp('.ui--wrapper');
 });
@@ -23,8 +59,19 @@ function createApp(selector) {
                 c: 0,
                 d: 0,
                 e: [
-                    { name: 'Guest Name 1', items: [2, 4] },
-                    { name: 'Guest Name 2', items: [] }
+                    {
+                        id: '0ce5-4835',
+                        name: 'Guest Name 1',
+                        items: [
+                            '6543797b-0ce5-4835-9bd9-498bf919a095',
+                            'da1d73f5-c3eb-4f4f-a0f8-69fb1645bc2f'
+                        ]
+                    },
+                    {
+                        id: '4f4f-a0f8',
+                        name: 'Guest Name 2',
+                        items: []
+                    }
                 ]
             },
             modals: {
@@ -34,6 +81,28 @@ function createApp(selector) {
         };
     };
     var methods = {
+        axios: function () {
+            return __awaiter(this, void 0, void 0, function () {
+                var url, response, error_1;
+                return __generator(this, function (_a) {
+                    switch (_a.label) {
+                        case 0:
+                            _a.trys.push([0, 2, , 3]);
+                            url = '/store.json';
+                            return [4, fetch(url).then(function (r) { return r.json(); })];
+                        case 1:
+                            response = _a.sent();
+                            setState('products', response.products);
+                            return [3, 3];
+                        case 2:
+                            error_1 = _a.sent();
+                            console.error(error_1);
+                            return [3, 3];
+                        case 3: return [2];
+                    }
+                });
+            });
+        },
         isStep: function (input) {
             return (input === this.currentStep);
         },
@@ -43,9 +112,23 @@ function createApp(selector) {
             }
             this.currentStep = to;
         },
-        onApply: function (input) { },
-        onClose: function (input) {
-            this.modals[input].on = false;
+        onModals: function (modal, data) {
+            this.modals[modal] = data;
+        },
+        onApply: function (input) {
+            this.mainForm.e = this.mainForm.e.map(function (r) {
+                if (r.id === input.id)
+                    r = input;
+                return r;
+            });
+        },
+        onClose: function (modal) {
+            this.modals[modal].on = false;
+            switch (modal) {
+                case 'a':
+                    this.modals[modal].data = {};
+                    break;
+            }
         }
     };
     var computed = {
@@ -69,12 +152,16 @@ function createApp(selector) {
         ChildElementFourth: createChildElementFourth(),
         ModalElementSetitem: createModalElementSetitem()
     };
+    var created = function (_this) {
+        _this.axios();
+    };
     VueJs.component('input-element', createInputElement());
     new VueJs({
         data: data,
         methods: methods,
         computed: computed,
-        components: components
+        components: components,
+        created: function () { created(this); }
     }).$mount(selector);
 }
 function createChildElementFirst() {
@@ -118,6 +205,10 @@ function createChildElementSecond() {
         }
     };
     var methods = {
+        onModify: function (input) {
+            var data = this.currentForm.e.find(function (r) { return r.id === input; });
+            this.$emit('modals', 'a', { on: true, data: data });
+        },
         prev: function () {
             this.$emit('switch', this.nodeId, (this.nodeId - 1));
         },
@@ -221,6 +312,7 @@ function createModalElementSetitem() {
     var template = '#ui--template-modals-setitem';
     var data = function (_this) { return ({
         id: 4,
+        ready: false,
         currentValue: cloneJson(_this.dataset)
     }); };
     var props = {
@@ -230,25 +322,46 @@ function createModalElementSetitem() {
     var methods = {
         onApply: function () {
             this.$emit('apply', this.currentValue);
+            this.onClose();
         },
         onCancel: function () {
             var w = function (a) { return JSON.stringify(a); };
             if (w(this.dataset) === w(this.currentValue)) {
-                this.$emit('close');
+                this.onClose();
             }
             else {
                 if (confirm('Leave without save?'))
-                    this.$emit('close');
+                    this.onClose();
             }
+        },
+        onClose: function () {
+            var _this_1 = this;
+            this.ready = false;
+            setTimeout(function () {
+                _this_1.$emit('close');
+                scrollhidden(false);
+            }, 256);
         }
     };
-    var computed = {};
+    var computed = {
+        store: function () {
+            if (!this.ready)
+                return [];
+            var products = getState('products') || [];
+            var items = this.currentValue.items;
+            return products.map(function (r, idx) { return (__assign(__assign({}, r), { selected: (items.indexOf(r.id) > -1) })); });
+        }
+    };
     var created = function (_this) {
         scrollhidden(true);
     };
+    var mounted = function (_this) {
+        setTimeout(function () { _this.ready = true; });
+    };
     return { name: name, props: props, watch: watch, methods: methods, computed: computed, template: template,
         data: function () { return data(this); },
-        created: function () { created(this); }
+        created: function () { created(this); },
+        mounted: function () { mounted(this); }
     };
 }
 function hasProp(object, prop) {
@@ -265,5 +378,36 @@ function scrollhidden(input) {
 }
 function cloneJson(input) {
     return JSON.parse(JSON.stringify(input));
+}
+function getState(field) {
+    var state = sessionStorage.getItem('APP.ST4T3');
+    if (state) {
+        var decode = JSON.parse(state);
+        return decode[field];
+    }
+    else {
+        return void 0;
+    }
+}
+function setState(field, data) {
+    var state = sessionStorage.getItem('APP.ST4T3');
+    var e = {};
+    if (state) {
+        var decode = JSON.parse(state);
+        decode[field] = data;
+        e = decode;
+    }
+    else {
+        e[field] = data;
+    }
+    sessionStorage.setItem('APP.ST4T3', JSON.stringify(e));
+}
+function removeState(field) {
+    if (field) {
+        setState(field, null);
+    }
+    else {
+        sessionStorage.removeItem('APP.ST4T3');
+    }
 }
 //# sourceMappingURL=script.js.map

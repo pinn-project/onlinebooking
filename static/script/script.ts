@@ -24,8 +24,19 @@ function createApp (selector: string): void {
 				c: 0,
 				d: 0,
 				e: [
-					{ name: 'Guest Name 1', items: [2, 4] },
-					{ name: 'Guest Name 2', items: [] }
+					{
+						id: '0ce5-4835',
+						name: 'Guest Name 1',
+						items: [
+							'6543797b-0ce5-4835-9bd9-498bf919a095',
+							'da1d73f5-c3eb-4f4f-a0f8-69fb1645bc2f'
+						]
+					},
+					{
+						id: '4f4f-a0f8',
+						name: 'Guest Name 2',
+						items: []
+					}
 				]
 			},
 			modals: {
@@ -37,6 +48,16 @@ function createApp (selector: string): void {
 
 	// __METHODS
   const methods: any = {
+		async axios (): Promise<void> {
+			try {
+				let url: string = '/store.json'
+				let response: any = await fetch(url).then((r: Response): any => r.json())
+				setState('products', response.products)
+			} catch (error) {
+				console.error(error)
+			}
+		},
+
 		isStep (input: number): boolean {
 			return (input === this.currentStep)
 		},
@@ -46,10 +67,25 @@ function createApp (selector: string): void {
 			this.currentStep = to
 		},
 
-		onApply (input: any): void {},
+		onModals (modal: string, data: any): void {
+			this.modals[modal] = data
+		},
 
-		onClose (input: string): void {
-			this.modals[input].on = false
+		onApply (input: any): void {
+			this.mainForm.e = this.mainForm.e.map((r: any) => {
+				if (r.id === input.id) r = input
+				return r
+			})
+		},
+
+		onClose (modal: string): void {
+			this.modals[modal].on = false
+
+			switch (modal) {
+				case 'a':
+					this.modals[modal].data = {}
+					break;
+			}
 		}
 	}
 
@@ -80,6 +116,11 @@ function createApp (selector: string): void {
 		ModalElementSetitem: createModalElementSetitem()
 	}
 
+	// __CREATED <Lifecycle Hooks>
+	const created: any = (_this: any) => {
+		_this.axios()
+	}
+
 	// __GLOBAL_COMPONENT
 	VueJs.component('input-element', createInputElement())
 
@@ -88,7 +129,8 @@ function createApp (selector: string): void {
 		data,
 		methods,
 		computed,
-		components
+		components,
+		created () { created(this) }
 	}).$mount(selector)
 }
 
@@ -161,6 +203,11 @@ function createChildElementSecond (): any {
 
 	// __METHODS
 	const methods: any = {
+		onModify (input: string): void {
+			const data: any = this.currentForm.e.find((r: any) => r.id === input)
+			this.$emit('modals', 'a', { on: true, data })
+		},
+
 		prev (): void {
 			this.$emit('switch', this.nodeId, (this.nodeId - 1))
 		},
@@ -326,6 +373,7 @@ function createModalElementSetitem (): any {
 	// __DATA
 	const data: any = (_this: any): object => ({
 		id: 4,
+		ready: false,
 		currentValue: cloneJson(_this.dataset)
 	})
 
@@ -341,29 +389,55 @@ function createModalElementSetitem (): any {
 	const methods: any = {
 		onApply (): void {
 			this.$emit('apply', this.currentValue)
+			this.onClose()
 		},
 
 		onCancel (): void {
 			const w: any = (a: any) => JSON.stringify(a)
 			if (w(this.dataset) === w(this.currentValue)) {
-				this.$emit('close')
+				this.onClose()
 			} else {
-				if (confirm('Leave without save?')) this.$emit('close')
+				if (confirm('Leave without save?')) this.onClose()
 			}
+		},
+
+		onClose (): void {
+			this.ready = false
+			setTimeout((): void => {
+				this.$emit('close')
+				scrollhidden(false)
+			}, 256)
 		}
 	}
 	
 	// __COMPUTED
-	const computed: any = {}
+	const computed: any = {
+		store (): any[] {
+			if (!this.ready) return []
+			const products: any = getState('products') || []
+			const { items }: any = this.currentValue
+
+			return products.map((r: any, idx: number) => ({
+				...r,
+				selected: (items.indexOf(r.id) > -1)
+			}))
+		}
+	}
 	
 	// __CREATED <Lifecycle Hooks>
 	const created: any = (_this: any) => {
 		scrollhidden(true)
 	}
 
+	// __MOUNTED <Lifecycle Hooks>
+	const mounted: any = (_this: any) => {
+		setTimeout((): void => { _this.ready = true })
+	}
+
 	return { name, props, watch, methods, computed, template,
 		data () { return data(this) },
-		created () { created(this) }
+		created () { created(this) },
+		mounted () { mounted(this) }
 	}
 }
 
@@ -385,4 +459,35 @@ function scrollhidden (input?: boolean): void {
 }
 function cloneJson (input: any): any {
   return JSON.parse(JSON.stringify(input))
+}
+function getState (field: string): any {
+  const state: string | null = sessionStorage.getItem('APP.ST4T3')
+  if (state) {
+    let decode: any = JSON.parse(state)
+    return decode[field]
+  } else {
+    return void 0
+  }
+}
+function setState (field: string, data: any): void {
+  const state: string | null = sessionStorage.getItem('APP.ST4T3')
+  
+  let e: any = {}
+  
+  if (state) {
+    let decode: any = JSON.parse(state)
+    decode[field] = data
+    e = decode
+  } else {
+    e[field] = data
+  }
+  
+  sessionStorage.setItem('APP.ST4T3', JSON.stringify(e))
+}
+function removeState (field?: string): void {
+  if (field) {
+    setState(field, null)
+  } else {
+    sessionStorage.removeItem('APP.ST4T3')
+  }
 }

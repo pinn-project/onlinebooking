@@ -52,7 +52,6 @@
 
         &:focus {
           padding-left: 10px;
-          background-color: tint(@light-color, 82%);
         }
       }
 
@@ -81,10 +80,10 @@
 }
 
 .ui--modals.setitem {
-  [class$="-container"] {
+  [class*="-container"] {
     overflow: auto;
     height: 100%;
-    width: 60vw;
+    width: 50vw;
     margin: 0 0 0 auto;
   }
 
