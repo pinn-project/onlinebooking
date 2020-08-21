@@ -25,7 +25,7 @@ function createApp (selector: string): void {
 				d: 0,
 				e: [
 					{
-						id: '0ce5-4835',
+						id: 1,
 						name: 'Guest Name 1',
 						items: [
 							'6543797b-0ce5-4835-9bd9-498bf919a095',
@@ -33,7 +33,7 @@ function createApp (selector: string): void {
 						]
 					},
 					{
-						id: '4f4f-a0f8',
+						id: 2,
 						name: 'Guest Name 2',
 						items: []
 					}
@@ -73,7 +73,7 @@ function createApp (selector: string): void {
 
 		onApply (input: any): void {
 			this.mainForm.e = this.mainForm.e.map((r: any) => {
-				if (r.id === input.id) r = input
+				if (r.id === input.id) r = Object.assign(r, input)
 				return r
 			})
 		},
@@ -121,11 +121,15 @@ function createApp (selector: string): void {
 		_this.axios()
 	}
 
+	// __GLOBAL_PROPERTIES
+	VueJs.prototype.$price = price
+
 	// __GLOBAL_COMPONENT
 	VueJs.component('input-element', createInputElement())
 
 	// __START_APPLICATION
 	new VueJs({
+		name: 'App',
 		data,
 		methods,
 		computed,
@@ -203,9 +207,31 @@ function createChildElementSecond (): any {
 
 	// __METHODS
 	const methods: any = {
-		onModify (input: string): void {
+		addMore (): void {
+			const def: any = { id: 0, name: '', items: [] }
+			let n: number = (this.currentForm.e.length + 1)
+
+			def.id = n
+			def.name = `Guest Name ${n}`
+			this.currentForm.e.push(def)
+		},
+
+		onModify (input: number): void {
 			const data: any = this.currentForm.e.find((r: any) => r.id === input)
 			this.$emit('modals', 'a', { on: true, data })
+		},
+
+		onReset (input: number): void {
+			this.currentForm.e = this.currentForm.e.map((r: any) => {
+				if (r.id === input) r.items = []
+				return r
+			})
+		},
+
+		onRemove (input: number): void {
+			this.currentForm.e = this.currentForm.e.filter((r: any) => {
+				return r.id !== input
+			})
 		},
 
 		prev (): void {
@@ -216,13 +242,33 @@ function createChildElementSecond (): any {
 			this.$emit('switch', this.nodeId, this.nextId, this.currentForm) // cb(from, to, data)
 		},
 
-		hasItem (input: any[]): boolean {
+		hasArray (input: any[]): boolean {
 			return Boolean(isArray(input) && input.length)
+		},
+
+		getItemsById (input: string[]): any {
+			const products: any[] = getState('products')
+			return products.filter((r: any): boolean => (input.indexOf(r.id) > -1))
+		},
+
+		getSummary (input: string[]): any {
+			if (!input.length) return 0
+			const items: any[] = this.getItemsById(input)
+			return items.reduce((a: any, b: any) => a + b.price, 0)
 		}
 	}
 	
 	// __COMPUTED
-  const computed: any = {}
+  const computed: any = {
+		store (): any[] {
+			const results: any[] = cloneJson(this.currentForm.e)
+			return results.map((r: any) => ({
+				...r,
+				items: this.getItemsById(r.items),
+				summary: this.getSummary(r.items)
+			}))
+		}
+	}
 
 	return { data () { return data(this) }, name, props, watch, methods, computed, template }
 }
@@ -387,6 +433,18 @@ function createModalElementSetitem (): any {
 
 	// __METHODS
 	const methods: any = {
+		add (itemId: string): void {
+			let currentItems: string[] = this.currentValue.items
+
+			if (currentItems.indexOf(itemId) > -1) {
+				currentItems = currentItems.filter((r: any): boolean => r !== itemId)
+			} else {
+				currentItems.push(itemId)
+			}
+
+			this.currentValue.items = currentItems
+		},
+
 		onApply (): void {
 			this.$emit('apply', this.currentValue)
 			this.onClose()
@@ -413,10 +471,10 @@ function createModalElementSetitem (): any {
 	// __COMPUTED
 	const computed: any = {
 		store (): any[] {
-			if (!this.ready) return []
 			const products: any = getState('products') || []
 			const { items }: any = this.currentValue
-
+			
+			let r: any = this.ready
 			return products.map((r: any, idx: number) => ({
 				...r,
 				selected: (items.indexOf(r.id) > -1)
@@ -490,4 +548,8 @@ function removeState (field?: string): void {
   } else {
     sessionStorage.removeItem('APP.ST4T3')
   }
+}
+function price (input: number | string, fix: number = 0): string {
+  const n: string = Number(input).toFixed(fix).toString()
+  return n.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }

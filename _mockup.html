@@ -157,14 +157,18 @@
         </div>
 
         <div class="second-action">
-          <button type="button" class="btn btn-default">
-            <span class="text upper">add guest</span>
+          <button type="button" class="btn btn-border" @click="addMore">
+            <svg class="icon" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M11 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM1.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM6 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm4.5 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+              <path fill-rule="evenodd" d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"/>
+            </svg>
+            <span class="text upper">add more guest</span>
           </button>
         </div>
 
-        <div class="second-guests" v-for="(elm, idx) in currentForm.e" :key="idx">
+        <div class="second-guests" v-for="(elm, idx) in store" :key="idx">
           <div class="name">
-            <input type="text" v-model="elm.name">
+            <input type="text" v-model="currentForm.e[idx].name">
             <svg class="icon" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path fill-rule="evenodd" d="M5.707 13.707a1 1 0 0 1-.39.242l-3 1a1 1 0 0 1-1.266-1.265l1-3a1 1 0 0 1 .242-.391L10.086 2.5a2 2 0 0 1 2.828 0l.586.586a2 2 0 0 1 0 2.828l-7.793 7.793zM3 11l7.793-7.793a1 1 0 0 1 1.414 0l.586.586a1 1 0 0 1 0 1.414L5 13l-3 1 1-3z"/>
               <path fill-rule="evenodd" d="M9.854 2.56a.5.5 0 0 0-.708 0L5.854 5.855a.5.5 0 0 1-.708-.708L8.44 1.854a1.5 1.5 0 0 1 2.122 0l.293.292a.5.5 0 0 1-.707.708l-.293-.293z"/>
@@ -172,20 +176,50 @@
             </svg>
           </div>
 
-          <div class="items" v-if="hasItem(elm.items)">
-            <ul>
-              <li v-for="item in elm.items" :key="item">{{ item }}</li>
-            </ul>
+          <div class="items" v-if="hasArray(elm.items)">
+            <div class="rows" v-for="item in elm.items" :key="item.id">
+              <img class="item-image" src="/static/images/1.jpg" alt>
+              <div class="item-info" title="View Details">
+                <a class="item-name" v-text="item.name"></a>
+                <p class="item-hour" v-text="item.treatmentHours"></p>
+              </div>
+              <p class="item-price ui-thb" v-text="$price(item.price, 2)"></p>
+            </div>
           </div>
-
           <div class="warn" v-else>This guest does not have any treatment yet</div>
 
-          <button type="button" class="btn btn-border" @click="onModify(elm.id)">
-            <svg class="icon" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-            </svg>
-            <span class="text upper">{{ hasItem(elm.items) ? 'manage treatment' : 'choose treatment' }}</span>
-          </button>
+          <div :class="['bottom', { x3: store.length === 1 }]">
+            <button type="button"
+              title="Manage Treatment"
+              class="btn btn-info modify"
+              @click="onModify(elm.id)">
+              <svg class="icon" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+              </svg>
+              <span class="text upper">{{ hasArray(elm.items) ? 'manage treatment' : 'choose treatment' }}</span>
+            </button>
+
+            <button type="button"
+              title="Reset Treatment"
+              class="btn btn-info reset"
+              @click="onReset(elm.id)">
+              <span class="text">Reset</span>
+            </button>
+
+            <button type="button"
+              title="Remove Guest"
+              class="btn btn-danger remove"
+              @click="onRemove(elm.id)" v-if="store.length > 1">
+
+              <svg class="icon" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+              </svg>
+
+            </button>
+
+            <div class="count ui-thb">{{ $price(elm.summary, 2) }}</div>
+          </div>
         </div>
       </div>
 
@@ -253,7 +287,7 @@
 
         <div class="ui--modals-body body">
           <ul>
-            <li v-for="item in store" style="margin-bottom: 20px;">
+            <li v-for="item in store" style="margin-bottom: 20px;" @click="add(item.id)">
               {{ JSON.stringify(item) }}
             </li>
           </ul>

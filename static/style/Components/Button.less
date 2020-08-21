@@ -10,6 +10,8 @@
   border-radius: 2px;
   background-color: transparent;
 
+  transition: all 0.12s ease;
+
   .icon {
     width: 28px;
     padding: 0 10px 0 0;
@@ -39,16 +41,43 @@
 
   &-light {
     color: @gray-color;
+
+    &:hover {
+      .text {
+        text-decoration: underline;
+      }
+    }
   }
 
   &-border {
-    color: @primary-color;
-    border: solid 1px tint(@light-color, 50%);
-    background-color: transparent;
+    color: @gray-color;
+    background-color: @base-color;
+    border: solid 1px tint(@primary-color, 75%);
 
     &:hover {
-      border-color: tint(@light-color, 60%);
-      background-color: tint(@light-color, 80%);
+      color: @base-color;
+      border-color: @shsak-gray;
+      background-color: @shsak-gray;
+    }
+  }
+
+  &-info {
+    color: @primary-color;
+    background-color: tint(@primary-color, 88%);
+
+    &:hover {
+      color: @text-color;
+      background-color: @primary-color;
+    }
+  }
+
+  &-danger {
+    color: @error-color;
+    background-color: tint(@error-color, 86%);
+
+    &:hover {
+      color: @text-color;
+      background-color: @error-color;
     }
   }
 }

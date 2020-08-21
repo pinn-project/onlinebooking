@@ -60,7 +60,7 @@ function createApp(selector) {
                 d: 0,
                 e: [
                     {
-                        id: '0ce5-4835',
+                        id: 1,
                         name: 'Guest Name 1',
                         items: [
                             '6543797b-0ce5-4835-9bd9-498bf919a095',
@@ -68,7 +68,7 @@ function createApp(selector) {
                         ]
                     },
                     {
-                        id: '4f4f-a0f8',
+                        id: 2,
                         name: 'Guest Name 2',
                         items: []
                     }
@@ -118,7 +118,7 @@ function createApp(selector) {
         onApply: function (input) {
             this.mainForm.e = this.mainForm.e.map(function (r) {
                 if (r.id === input.id)
-                    r = input;
+                    r = Object.assign(r, input);
                 return r;
             });
         },
@@ -155,8 +155,10 @@ function createApp(selector) {
     var created = function (_this) {
         _this.axios();
     };
+    VueJs.prototype.$price = price;
     VueJs.component('input-element', createInputElement());
     new VueJs({
+        name: 'App',
         data: data,
         methods: methods,
         computed: computed,
@@ -205,9 +207,28 @@ function createChildElementSecond() {
         }
     };
     var methods = {
+        addMore: function () {
+            var def = { id: 0, name: '', items: [] };
+            var n = (this.currentForm.e.length + 1);
+            def.id = n;
+            def.name = "Guest Name " + n;
+            this.currentForm.e.push(def);
+        },
         onModify: function (input) {
             var data = this.currentForm.e.find(function (r) { return r.id === input; });
             this.$emit('modals', 'a', { on: true, data: data });
+        },
+        onReset: function (input) {
+            this.currentForm.e = this.currentForm.e.map(function (r) {
+                if (r.id === input)
+                    r.items = [];
+                return r;
+            });
+        },
+        onRemove: function (input) {
+            this.currentForm.e = this.currentForm.e.filter(function (r) {
+                return r.id !== input;
+            });
         },
         prev: function () {
             this.$emit('switch', this.nodeId, (this.nodeId - 1));
@@ -215,11 +236,27 @@ function createChildElementSecond() {
         next: function () {
             this.$emit('switch', this.nodeId, this.nextId, this.currentForm);
         },
-        hasItem: function (input) {
+        hasArray: function (input) {
             return Boolean(isArray(input) && input.length);
+        },
+        getItemsById: function (input) {
+            var products = getState('products');
+            return products.filter(function (r) { return (input.indexOf(r.id) > -1); });
+        },
+        getSummary: function (input) {
+            if (!input.length)
+                return 0;
+            var items = this.getItemsById(input);
+            return items.reduce(function (a, b) { return a + b.price; }, 0);
         }
     };
-    var computed = {};
+    var computed = {
+        store: function () {
+            var _this_1 = this;
+            var results = cloneJson(this.currentForm.e);
+            return results.map(function (r) { return (__assign(__assign({}, r), { items: _this_1.getItemsById(r.items), summary: _this_1.getSummary(r.items) })); });
+        }
+    };
     return { data: function () { return data(this); }, name: name, props: props, watch: watch, methods: methods, computed: computed, template: template };
 }
 function createChildElementThird() {
@@ -320,6 +357,16 @@ function createModalElementSetitem() {
     };
     var watch = {};
     var methods = {
+        add: function (itemId) {
+            var currentItems = this.currentValue.items;
+            if (currentItems.indexOf(itemId) > -1) {
+                currentItems = currentItems.filter(function (r) { return r !== itemId; });
+            }
+            else {
+                currentItems.push(itemId);
+            }
+            this.currentValue.items = currentItems;
+        },
         onApply: function () {
             this.$emit('apply', this.currentValue);
             this.onClose();
@@ -345,10 +392,9 @@ function createModalElementSetitem() {
     };
     var computed = {
         store: function () {
-            if (!this.ready)
-                return [];
             var products = getState('products') || [];
             var items = this.currentValue.items;
+            var r = this.ready;
             return products.map(function (r, idx) { return (__assign(__assign({}, r), { selected: (items.indexOf(r.id) > -1) })); });
         }
     };
@@ -409,5 +455,10 @@ function removeState(field) {
     else {
         sessionStorage.removeItem('APP.ST4T3');
     }
+}
+function price(input, fix) {
+    if (fix === void 0) { fix = 0; }
+    var n = Number(input).toFixed(fix).toString();
+    return n.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
 }
 //# sourceMappingURL=script.js.map
