@@ -1,0 +1,206 @@
+// SETP-3
+.third {
+  .h3 {
+    padding: 0 0 10px;
+    color: @primary-color;
+    font-weight: @font-weight-bolder;
+    text-transform: capitalize;
+  }
+
+  .rows {
+    &:not(:last-child) { margin-bottom: 40px }
+  }
+
+  .grid {
+    display: grid;
+    grid-column-gap: 40px;
+    grid-template-columns: 2fr 1fr;
+
+    .columns {
+      &:nth-child(1) {
+        display: grid;
+        grid-auto-flow: row;
+        grid-row-gap: 15px;
+      }
+
+      &:nth-child(2) {
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        border-left: solid 1px tint(@primary-color, 85%);
+      }
+    }
+
+    .btn-login {
+      display: block;
+      width: 120px;
+      height: 120px;
+      border-radius: 100%;
+      color: @base-color;
+      background-color: @primary-color;
+    }
+  }
+
+  .member {
+    display: grid;
+    grid-column-gap: 40px;
+    grid-template-columns: 2fr 1fr;
+
+    .columns {
+      &:nth-child(1) {
+        display: grid;
+        grid-auto-flow: row;
+        grid-row-gap: 10px;
+      }
+
+      &:nth-child(2) {
+        display: grid;
+        align-items: center;
+        justify-items: center;
+        border-left: solid 1px tint(@primary-color, 85%);
+      }
+    }
+
+    .lr {
+      &:nth-child(1) {
+        display: grid;
+        grid-column-gap: 15px;
+        grid-template-columns: 60px 1fr auto;
+      }
+
+      &:nth-child(2) {
+        text-align: right;
+        border-top: solid 1px tint(@primary-color, 88%);
+        padding-top: 5px;
+      }
+
+      .avatar {
+        padding: 10px;
+        border-radius: 100%;
+        background-color: wheat;
+
+        img {
+          display: block;
+          width: 100%;
+          margin: auto;
+        }
+      }
+
+      .info {
+        align-self: flex-end;
+
+        .type {
+          text-transform: uppercase;
+          font-size: @font-size-medium;
+          font-weight: @font-weight-bolder;
+
+          &::after {
+            text-transform: uppercase;
+            margin-left: 5px;
+            content: 'membership';
+            font-size: @font-size-small;
+            font-weight: @font-weight-normal;
+          }
+        }
+
+        .name {
+          font-weight: @font-weight-bolder;
+        }
+      }
+
+      .refill {
+        align-self: flex-end;
+
+        .btn-info {
+          min-width: auto;
+          text-transform: uppercase;
+        }
+      }
+
+      .balance {
+        text-transform: uppercase;
+
+        small {
+          font-size: @font-size-smaller;
+        }
+
+        strong {
+          margin-left: 5px;
+          font-size: @font-size-larger;
+          font-weight: @font-weight-bolder;
+        }
+      }
+    }
+  }
+
+  .method {
+    display: grid;
+    grid-gap: 15px;
+    grid-template-columns: repeat(2, 1fr);
+
+    &.selected {
+      & > *:not(.active) {
+        opacity: 0.4;
+      }
+    }
+
+    &-li {
+      display: grid;
+      grid-column-gap: 10px;
+      grid-template-columns: 40px 1fr;
+      user-select: none;
+      cursor: pointer;
+      padding: 5px;
+      border-radius: 50px;
+      background-color: tint(@gray-color, 88%);
+
+      &.active {
+        background-color: tint(@gray-color, 86%);
+        box-shadow: 0 1px 2px rgba(@gray-color, 0.1);
+      }
+
+      &-icon {
+        width: 24px;
+        margin: auto;
+      }
+
+      &-name {
+        p {
+          margin: 0 0 -4px;
+          font-weight: @font-weight-bold;
+          text-transform: capitalize;
+        }
+
+        i {
+          color: @gray-color;
+          font-size: @font-size-smaller;
+        }
+      }
+    }
+  }
+
+  .summary {
+    .li {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      margin: 0 0 5px;
+
+      .title {
+        min-width: 160px;
+        font-weight: @font-weight-bold;
+      }
+
+      .value {
+        &::before {
+          content: ':';
+          margin-right: 5px;
+        }
+
+        &.bold {
+          font-size: @font-size-large;
+          font-weight: @font-weight-bolder;
+        }
+      }
+    }
+  }
+}

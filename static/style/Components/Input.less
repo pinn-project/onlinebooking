@@ -5,8 +5,8 @@
     color: @bunker-gray;
     display: block;
     margin: 0 0 5px;
-    font-weight: 700;
-    text-transform: uppercase;
+    font-weight: @font-weight-bold;
+    text-transform: capitalize;
     user-select: none;
 
     &[required] {
@@ -50,13 +50,13 @@
     color: @shsak-gray;
     background-color: tint(@light-color, 80%);
 
-    &:active,
-    &:focus {
-      background-color: tint(@light-color, 82%);
-      box-shadow:
-        0 0 0 1px rgba(@info-color, 0.3),
-        0 0 0 4px rgba(@info-color, 0.2);
-    }
+    // &:active,
+    // &:focus {
+    //   background-color: tint(@light-color, 85%);
+    //   box-shadow:
+    //     0 0 0 1px rgba(@info-color, 0.3),
+    //     0 0 0 4px rgba(@info-color, 0.2);
+    // }
   }
 
   &-select {

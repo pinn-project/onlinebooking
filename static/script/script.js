@@ -72,12 +72,18 @@ function createApp(selector) {
                         name: 'Guest Name 2',
                         items: []
                     }
-                ]
+                ],
+                f: '',
+                g: '',
+                h: '',
+                i: '',
+                j: '',
+                k: ''
             },
             modals: {
                 a: { on: false, data: {} }
             },
-            currentStep: 2
+            currentStep: 1
         };
     };
     var methods = {
@@ -210,6 +216,8 @@ function createChildElementSecond() {
         addMore: function () {
             var def = { id: 0, name: '', items: [] };
             var n = (this.currentForm.e.length + 1);
+            if (n > 10)
+                return void 0;
             def.id = n;
             def.name = "Guest Name " + n;
             this.currentForm.e.push(def);
@@ -265,7 +273,9 @@ function createChildElementThird() {
     var data = function (_this) { return ({
         nodeId: 3,
         nextId: 4,
-        currentForm: _this.dataset
+        payId: 0,
+        currentForm: _this.dataset,
+        memberLogin: false
     }); };
     var props = {
         dataset: { required: true }
@@ -276,6 +286,12 @@ function createChildElementThird() {
         }
     };
     var methods = {
+        onPay: function (input) {
+            this.payId = input;
+        },
+        loginWithMember: function () {
+            this.memberLogin = true;
+        },
         prev: function () {
             this.$emit('switch', this.nodeId, (this.nodeId - 1));
         },
@@ -283,7 +299,24 @@ function createChildElementThird() {
             this.$emit('switch', this.nodeId, this.nextId, this.currentForm);
         }
     };
-    var computed = {};
+    var computed = {
+        methods: function () {
+            var _this_1 = this;
+            var data = [
+                { id: 1, label: 'credit card', desc: 'Pay with MasterCard, Visa or Amax' },
+                { id: 2, label: 'Internet Banking', desc: 'Pay directly from your bank account' },
+                { id: 3, label: 'Paypal', desc: 'Faster & safer way to send money' },
+                { id: 4, label: 'Member Balance', desc: 'Pay with your membership balance' }
+            ];
+            return data.map(function (r) { return (__assign(__assign({}, r), { active: (r.id === _this_1.payId) })); });
+        },
+        hasPayment: function () {
+            return Boolean(this.payId);
+        },
+        isCreditCard: function () {
+            return Boolean(this.payId === 1);
+        }
+    };
     return { data: function () { return data(this); }, name: name, props: props, watch: watch, methods: methods, computed: computed, template: template };
 }
 function createChildElementFourth() {
@@ -350,7 +383,11 @@ function createModalElementSetitem() {
     var data = function (_this) { return ({
         id: 4,
         ready: false,
-        currentValue: cloneJson(_this.dataset)
+        currentValue: cloneJson(_this.dataset),
+        filters: {
+            search: '',
+            price: 0
+        }
     }); };
     var props = {
         dataset: { type: Object, required: true }
@@ -395,7 +432,8 @@ function createModalElementSetitem() {
             var products = getState('products') || [];
             var items = this.currentValue.items;
             var r = this.ready;
-            return products.map(function (r, idx) { return (__assign(__assign({}, r), { selected: (items.indexOf(r.id) > -1) })); });
+            var n = products.map(function (r, idx) { return (__assign(__assign({}, r), { selected: (items.indexOf(r.id) > -1) })); });
+            return groupBy(n, 'group');
         }
     };
     var created = function (_this) {
@@ -418,6 +456,13 @@ function isArray(input) {
 }
 function isObject(input) {
     return input != null && Object.prototype.toString.call(input) === '[object Object]';
+}
+function groupBy(arr, prop) {
+    return arr.reduce(function (g, i) {
+        g[i[prop]] = g[i[prop]] || [];
+        g[i[prop]].push(i);
+        return g;
+    }, {});
 }
 function scrollhidden(input) {
     document.body.style.overflow = (input ? 'hidden' : 'unset');

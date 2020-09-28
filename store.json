@@ -6,7 +6,9 @@
       "name": "Oasis Royal Thai Facial - 1",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
-      "price": 1000
+      "price": 1000,
+      "group": "Items Group A",
+      "tags": ["hot", "new"]
     },
     {
       "id": "b2bb9582-94b9-4656-b287-4b56ce1b2853",
@@ -14,7 +16,9 @@
       "name": "Oasis Royal Thai Facial - 2",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1.5,
-      "price": 1100
+      "price": 1100,
+      "group": "Items Group A",
+      "tags": ["hot"]
     },
     {
       "id": "da1d73f5-c3eb-4f4f-a0f8-69fb1645bc2f",
@@ -22,7 +26,9 @@
       "name": "Oasis Royal Thai Facial - 3",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
-      "price": 1200
+      "price": 1200,
+      "group": "Items Group A",
+      "tags": ["new"]
     },
     {
       "id": "c43a22fa-f0a5-48c0-978f-4090da7f306b ",
@@ -30,7 +36,9 @@
       "name": "Oasis Royal Thai Facial - 4",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
-      "price": 1300
+      "price": 1300,
+      "group": "Items Group A",
+      "tags": ["new"]
     },
     {
       "id": "e4f14ed0-2a13-4ece-912b-9b4f08193954",
@@ -38,7 +46,8 @@
       "name": "Oasis Royal Thai Facial - 5",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
-      "price": 1100
+      "price": 1100,
+      "group": "Items Group A"
     },
     {
       "id": "85c1dc36-4072-43b9-9e85-ad7704fe5f3e",
@@ -46,7 +55,9 @@
       "name": "Oasis Royal Thai Facial - 6",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
-      "price": 1000
+      "price": 1000,
+      "group": "Items Group A",
+      "tags": ["promotion"]
     },
     {
       "id": "7c669795-d269-4d1d-8613-01651daa2c10",
@@ -54,7 +65,9 @@
       "name": "Oasis Royal Thai Facial - 7",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
-      "price": 1000
+      "group": "Items Group B",
+      "price": 1000,
+      "tags": ["new"]
     },
     {
       "id": "ff524e82-935f-4153-97ce-23df5f0e7c88",
@@ -62,6 +75,7 @@
       "name": "Oasis Royal Thai Facial - 8",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
+      "group": "Items Group B",
       "price": 1000
     },
     {
@@ -70,6 +84,7 @@
       "name": "Oasis Royal Thai Facial - 9",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
+      "group": "Items Group B",
       "price": 1000
     },
     {
@@ -78,6 +93,7 @@
       "name": "Oasis Royal Thai Facial - 10",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
+      "group": "Items Group B",
       "price": 1400
     },
     {
@@ -86,7 +102,9 @@
       "name": "Oasis Royal Thai Facial - 11",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
-      "price": 1000
+      "group": "Items Group C",
+      "price": 1000,
+      "tags": ["new"]
     },
     {
       "id": "adeb4a88-680f-4de3-ac28-10e73afa88cb",
@@ -94,7 +112,9 @@
       "name": "Oasis Royal Thai Facial - 12",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
-      "price": 1000
+      "group": "Items Group C",
+      "price": 1000,
+      "tags": ["new"]
     },
     {
       "id": "d53cb1bc-705a-4a11-8599-861116582b1e",
@@ -102,7 +122,9 @@
       "name": "Oasis Royal Thai Facial - 13",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
-      "price": 1000
+      "group": "Items Group C",
+      "price": 1000,
+      "tags": ["new"]
     },
     {
       "id": "640582a7-aa99-488f-b816-7e4df23c14b7",
@@ -110,6 +132,7 @@
       "name": "Oasis Royal Thai Facial - 14",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
+      "group": "Items Group C",
       "price": 1000
     },
     {
@@ -118,6 +141,7 @@
       "name": "Oasis Royal Thai Facial - 15",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
+      "group": "Items Group C",
       "price": 1000
     },
     {
@@ -126,6 +150,7 @@
       "name": "Oasis Royal Thai Facial - 16",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
+      "group": "Items Group C",
       "price": 1000
     },
     {
@@ -134,6 +159,7 @@
       "name": "Oasis Royal Thai Facial - 17",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
+      "group": "Items Group C",
       "price": 1000
     },
     {
@@ -142,6 +168,7 @@
       "name": "Oasis Royal Thai Facial - 18",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
+      "group": "Items Group C",
       "price": 1000
     },
     {
@@ -150,6 +177,7 @@
       "name": "Oasis Royal Thai Facial - 19",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
+      "group": "Items Group C",
       "price": 1000
     },
     {
@@ -158,118 +186,7 @@
       "name": "Oasis Royal Thai Facial - 20",
       "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
       "treatmentHours": 1,
-      "price": 1000
-    },
-    {
-      "id": "88893dd9-b096-46ee-a210-22489b0401f9",
-      "picture": "1.jpg",
-      "name": "Oasis Royal Thai Facial - 21",
-      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
-      "treatmentHours": 1,
-      "price": 1000
-    },
-    {
-      "id": "f1c9810a-34b4-4c90-8312-c2dce10301d9",
-      "picture": "1.jpg",
-      "name": "Oasis Royal Thai Facial - 22",
-      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
-      "treatmentHours": 1,
-      "price": 1000
-    },
-    {
-      "id": "d5561771-33f3-41c3-b6fe-9b25355c2201",
-      "picture": "1.jpg",
-      "name": "Oasis Royal Thai Facial - 23",
-      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
-      "treatmentHours": 1,
-      "price": 1000
-    },
-    {
-      "id": "35551d2f-a6af-4dc1-abf7-007a65953589",
-      "picture": "1.jpg",
-      "name": "Oasis Royal Thai Facial - 24",
-      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
-      "treatmentHours": 1,
-      "price": 1000
-    },
-    {
-      "id": "7baae190-3350-45b6-ab4b-4ecf465d98f6",
-      "picture": "1.jpg",
-      "name": "Oasis Royal Thai Facial - 25",
-      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
-      "treatmentHours": 1,
-      "price": 1000
-    },
-    {
-      "id": "788ec9ee-08fb-46f9-9509-fedbb344fe2d",
-      "picture": "1.jpg",
-      "name": "Oasis Royal Thai Facial - 26",
-      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
-      "treatmentHours": 1,
-      "price": 1000
-    },
-    {
-      "id": "c222b4ce-6c7b-43ad-b039-3f64557c84b3",
-      "picture": "1.jpg",
-      "name": "Oasis Royal Thai Facial - 27",
-      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
-      "treatmentHours": 1,
-      "price": 1000
-    },
-    {
-      "id": "dd909ad1-9abe-4184-bea1-637f3e3a392a",
-      "picture": "1.jpg",
-      "name": "Oasis Royal Thai Facial - 28",
-      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
-      "treatmentHours": 1,
-      "price": 1000
-    },
-    {
-      "id": "06ec7e43-6ddc-43b8-905c-6dcbad88e642",
-      "picture": "1.jpg",
-      "name": "Oasis Royal Thai Facial - 29",
-      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
-      "treatmentHours": 1,
-      "price": 1000
-    },
-    {
-      "id": "d1263a00-6db7-4f2c-b794-8c5bf6166933",
-      "picture": "1.jpg",
-      "name": "Oasis Royal Thai Facial - 30",
-      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
-      "treatmentHours": 1,
-      "price": 1000
-    },
-    {
-      "id": "151c2dd2-ead5-4e38-b675-84a5c22826ae",
-      "picture": "1.jpg",
-      "name": "Oasis Royal Thai Facial - 31",
-      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
-      "treatmentHours": 1,
-      "price": 1000
-    },
-    {
-      "id": "1c4a33e5-2d70-4217-b750-fb5b79ffa719",
-      "picture": "1.jpg",
-      "name": "Oasis Royal Thai Facial - 32",
-      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
-      "treatmentHours": 1,
-      "price": 1000
-    },
-    {
-      "id": "c01f1cdc-cc9e-482c-b031-4a9287316bb0",
-      "picture": "1.jpg",
-      "name": "Oasis Royal Thai Facial - 33",
-      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
-      "treatmentHours": 1,
-      "price": 1000
-    },
-    {
-      "id": "5b457c48-adf2-448d-bf01-5fea113c414e",
-      "picture": "1.jpg",
-      "name": "Oasis Royal Thai Facial - 34",
-      "desc": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste minima corporis alias nostrum, molestias praesentium deleniti, ad, quaerat quam nihil numquam mollitia? Eum consectetur excepturi quaerat deleniti quisquam necessitatibus fugit.",
-      "treatmentHours": 1,
+      "group": "Items Group C",
       "price": 1000
     }
   ]

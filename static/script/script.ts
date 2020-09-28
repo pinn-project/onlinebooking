@@ -37,12 +37,18 @@ function createApp (selector: string): void {
 						name: 'Guest Name 2',
 						items: []
 					}
-				]
+				],
+				f: '',
+				g: '',
+				h: '',
+				i: '',
+				j: '',
+				k: ''
 			},
 			modals: {
 				a: { on: false, data: {} }
 			},
-			currentStep: 2
+			currentStep: 1
 		}
 	}
 
@@ -211,6 +217,8 @@ function createChildElementSecond (): any {
 			const def: any = { id: 0, name: '', items: [] }
 			let n: number = (this.currentForm.e.length + 1)
 
+			if (n > 10) return void 0
+
 			def.id = n
 			def.name = `Guest Name ${n}`
 			this.currentForm.e.push(def)
@@ -285,7 +293,9 @@ function createChildElementThird (): any {
 	const data: any = (_this: any): object => ({
 		nodeId: 3,
 		nextId: 4,
-		currentForm: _this.dataset
+		payId: 0,
+		currentForm: _this.dataset,
+		memberLogin: false
 	})
 
 	// __PROPS
@@ -302,6 +312,14 @@ function createChildElementThird (): any {
 
 	// __METHODS
 	const methods: any = {
+		onPay (input: number): void {
+			this.payId = input
+		},
+
+		loginWithMember (): void {
+			this.memberLogin = true
+		},
+
 		prev (): void {
 			this.$emit('switch', this.nodeId, (this.nodeId - 1))
 		},
@@ -312,7 +330,29 @@ function createChildElementThird (): any {
 	}
 	
 	// __COMPUTED
-  const computed: any = {}
+  const computed: any = {
+		methods (): any[] {
+			const data: any[] = [
+				{ id: 1, label: 'credit card', desc: 'Pay with MasterCard, Visa or Amax' },
+				{ id: 2, label: 'Internet Banking', desc: 'Pay directly from your bank account' },
+				{ id: 3, label: 'Paypal', desc: 'Faster & safer way to send money' },
+				{ id: 4, label: 'Member Balance', desc: 'Pay with your membership balance' }
+			]
+
+			return data.map((r: any) => ({
+				...r,
+				active: (r.id === this.payId)
+			}))
+		},
+
+		hasPayment (): boolean {
+			return Boolean(this.payId)
+		},
+
+		isCreditCard (): boolean {
+			return Boolean(this.payId === 1)
+		}
+	}
 
 	return { data () { return data(this) }, name, props, watch, methods, computed, template }
 }
@@ -420,7 +460,11 @@ function createModalElementSetitem (): any {
 	const data: any = (_this: any): object => ({
 		id: 4,
 		ready: false,
-		currentValue: cloneJson(_this.dataset)
+		currentValue: cloneJson(_this.dataset),
+		filters: {
+			search: '',
+			price: 0
+		}
 	})
 
 	// __PROPS
@@ -475,10 +519,12 @@ function createModalElementSetitem (): any {
 			const { items }: any = this.currentValue
 			
 			let r: any = this.ready
-			return products.map((r: any, idx: number) => ({
+			let n: any[] = products.map((r: any, idx: number) => ({
 				...r,
 				selected: (items.indexOf(r.id) > -1)
 			}))
+
+			return groupBy(n, 'group')
 		}
 	}
 	
@@ -511,6 +557,13 @@ function isArray (input: any): boolean {
 }
 function isObject (input: any): boolean {
   return input != null && Object.prototype.toString.call(input) === '[object Object]'
+}
+function groupBy (arr: any, prop: string): any[] {
+  return arr.reduce((g: any, i: any): any => {
+    g[i[prop]] = g[i[prop]] || []
+    g[i[prop]].push(i)
+    return g
+  }, {})
 }
 function scrollhidden (input?: boolean): void {
   document.body.style.overflow = (input ? 'hidden' : 'unset')
